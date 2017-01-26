@@ -1,3 +1,8 @@
+/*Creates a stream of circles that looks a like shooting star. For best results, move the mouse slowly
+when you run the program. 
+*/
+
+
 int num = 40;
 int[] x = new int[num]; 
 int[] y = new int[num]; /*Two arrays. One to hold the x position. One to 
