@@ -3,6 +3,9 @@
    A simulation of fire blowing in the wind. The wind blows the fire towards 
    the mouse's current location. 
    
+   Repurposed Fire Simulation as propulsion for the SpaceSim simulator. 
+   https://github.com/alexfidelchen/SpaceSim
+   
    Inspired by Shiffman's The Nature of Code.   
 */
 import java.util.Random;
