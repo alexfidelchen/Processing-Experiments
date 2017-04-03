@@ -1,0 +1,79 @@
+PVector location, velocity, acceleration, direction, mouseLocation;
+color[] particleColors = {color(212,32,67,150), color(181,146,254,150), color(9,92,198,150)};
+
+
+Mover[] particles = new Mover[1500];
+void setup(){
+  size(300,300);
+  background(#ffc5e7);
+  //Initialize the mover.
+  location = new PVector(0,0);
+  velocity = new PVector(0,0);
+  acceleration = new PVector(0,0);
+  for (int i = 0; i < particles.length ; i++ ){
+    PVector velocity = new PVector(0,0);
+    particles[i] = new Mover(velocity);
+    println(particles[i].location);
+    //println("Number of Particles: " +particles.length);
+    
+  }
+  
+  
+  
+}
+void draw(){
+  background(#ffc5e7);
+  for ( Mover p : particles){
+    p.move();
+    p.display();
+  }
+}
+
+class Mover {
+  // Properties 
+  PVector location = new PVector(random(width),random(height));
+  PVector velocity;
+  PVector acceleration;
+  float size = random(5,10);
+  int choose = (int) (random(4)-1);
+  color moverColor = particleColors[choose];
+  Mover(PVector velocityTemp) {
+    velocity = velocityTemp;
+    
+  }
+  
+  //Methods 
+  void display() {
+    noStroke();
+    fill(moverColor);
+    ellipse(location.x, location.y, size, size);
+  }
+  
+  void move() {
+    mouseLocation = new PVector(width/2,height/2);
+  /* reinitialize mouseLocation constantly the mouseLocation will
+  change with the mouse();
+  */
+  direction = PVector.sub(mouseLocation,location); /* Direction that the mover
+  move to. By finding the vector between the mouse and location, we ensure
+  that the mouse is pointing in the right direction.
+  
+  It keeps changing direction because you're subtracting the mouseLocation
+  with the direction, the velocity overshoots the mouselocation so the 
+  direction changes.
+  */
+  acceleration = direction.normalize(null); /* Putting "null" in the parameter
+  makes direction.normalize(null) a new vector. 
+  */
+  float scalar = random(0.03,0.1);
+  acceleration.mult(scalar);
+  //println("Current acceleration: " + acceleration.mag());
+  //println("Current direction: " + direction.x + "," + direction.y);
+  
+  velocity.add(acceleration);
+  //println("Current speed:" + velocity.mag()); 
+  velocity.limit(4);
+  location.add(velocity);
+    
+  }
+}

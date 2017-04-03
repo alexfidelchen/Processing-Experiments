@@ -1,0 +1,50 @@
+
+class Particle {
+  // Properties 
+  PVector location = new PVector(random(width),random(height));
+  PVector velocity;
+  PVector acceleration;
+  float size = random(5,10);
+  color[] particleColors = {color(212,32,67,150), color(181,146,254,150),
+                            color(9,92,198,150)};
+  color moverColor;
+  
+  Particle(PVector velocityTemp) {
+    /* When a Particle object gets initialized, it chooses a color from 
+    particleColors. 
+    */
+    velocity = velocityTemp;
+    int choose = (int) (random(4)-1);
+    moverColor = particleColors[choose];
+    
+  }
+  
+  //Methods 
+  void display() {
+    noStroke();
+    fill(moverColor);
+    ellipse(location.x, location.y, size, size);
+  }
+  
+  void move() {
+  center = new PVector(width/2,height/2);
+  /* reinitialize center constantly the center will
+  change with the mouse();
+  */
+  // direction ensures that the Particle is moving towards the center. 
+  direction = PVector.sub(center,location); 
+  velocity = direction.normalize(null); /* Putting "null" in the parameter
+  makes direction.normalize(null) a new vector. 
+  */
+  float scalar = 1;
+  velocity.mult(scalar);
+ // println("Current velocity: " + velocity.mag());
+  //println("Current direction: " + direction.x + "," + direction.y);
+  
+
+  //println("Current speed:" + velocity.mag()); 
+  velocity.limit(4);
+  location.add(velocity);
+    
+  }
+}

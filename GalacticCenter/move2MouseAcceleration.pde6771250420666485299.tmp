@@ -1,0 +1,29 @@
+// The closer the mover gets to the mouse, the lower the mover's acceleration. 
+PVector location, velocity, acceleration, difference;
+void setup(){
+  size(300,300);
+  background(255);
+  location = new PVector(width/2,height/2);
+  velocity = new PVector(0,0);
+  acceleration = new PVector(1,1);
+}
+void draw(){
+}
+
+class Mover {
+  // Properties 
+  PVector location; 
+  PVector velocity; 
+  PVector acceleration; 
+  Mover(PVector locateTemp, PVector veloTemp, PVector accelTemp) {
+    location = locateTemp; 
+    velocity = veloTemp; 
+    acceleration = accelTemp;
+  }
+  
+  //Methods 
+  void display() {
+    fill(150);
+    ellipse(location.x, location.y, 20, 20);
+  }
+}
